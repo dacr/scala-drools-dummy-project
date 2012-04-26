@@ -1,0 +1,10 @@
+package dummy;
+
+dialect "mvel"
+
+rule "first rule"
+  when
+    Someone($name:name, name == "toto", age > 20)
+  then
+    System.out.println("hello "+$name)
+end

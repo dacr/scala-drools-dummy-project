@@ -2,9 +2,75 @@ package dummy;
 
 dialect "mvel"
 
-rule "first rule"
+import java.util.LinkedList;
+
+// --------------------------------------------------------------
+
+rule "who is young"
   when
-    Someone($name:name, name == "toto", age > 20)
+    Someone($name:name, age < 30)
   then
-    System.out.println("hello "+$name)
+    System.out.println($name+" is very young")
 end
+
+// --------------------------------------------------------------
+
+rule "people cars"
+  when
+    $someone:Someone($name:name)
+    $car : Car(someone == $someone)
+  then
+    System.out.println("One of "+$name+"'s car is "+$car.color.name+" "+$car.model)
+end
+
+// --------------------------------------------------------------
+
+rule "who own at least one red car"
+  when
+    $someone:Someone($name:name)
+    exists Car(someone == $someone, color == Color.red)
+  then
+    System.out.println($name+" has at least one red car")
+end
+
+// --------------------------------------------------------------
+
+rule "who doesn't have a home"
+  when
+    $someone:Someone($name:name)
+    not Home(someone == $someone)
+  then
+    insert(new InformationRequest($someone, $name+"'s home is unknown"))
+end
+
+// --------------------------------------------------------------
+
+rule "who doesn't have an address"
+  when
+    $someone:Someone($name:name)
+    Home(someone == $someone, !address.isDefined)
+  then
+    insert(new InformationRequest($someone, $name+" address is unknown"))
+end
+
+// --------------------------------------------------------------
+
+rule "process information requests"
+  when
+    InformationRequest($who:someone, $what:message)
+  then
+    System.out.println("INFORMATION REQUESTED FOR "+$who+" : "+$what)
+end
+
+// --------------------------------------------------------------
+
+rule "who owns more than 1 car"
+  when
+    $someone : Someone($name:name)
+    $cars    : LinkedList( size>1 ) from collect(Car(someone == $someone))
+  then
+    System.out.println($name+" has "+$cars.size+" cars")  
+end
+
+// --------------------------------------------------------------
+

@@ -25,7 +25,6 @@ import org.scalatest.junit.JUnitRunner
 class DummyTest extends FunSuite with ShouldMatchers {
   
   test("Simple test") {
-    Dummy.message should startWith("Hello")
     info("Test done")
   }
   

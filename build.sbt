@@ -30,7 +30,7 @@ libraryDependencies += "com.thoughtworks.xstream" % "xstream" % "1.4.2"
             
 
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.7.2" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "1.8" % "test"
 
 libraryDependencies += "junit" % "junit" % "4.10" % "test"
 

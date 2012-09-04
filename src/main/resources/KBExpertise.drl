@@ -55,6 +55,16 @@ end
 
 // --------------------------------------------------------------
 
+rule "Who live at London"
+  when
+    $someone:Someone($name:name)
+    Home(someone == $someone, address.isDefined, ((Address)address.get).town == "London")
+  then
+    insert(new InformationRequest($someone, $name+" lives in London"))
+end
+
+// --------------------------------------------------------------
+
 rule "process information requests"
   when
     InformationRequest($who:someone, $what:message)

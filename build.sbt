@@ -14,15 +14,15 @@ jarName in assembly := "dummy.jar"
 
 
 
-libraryDependencies += "org.drools" % "drools-compiler" % "5.3.1.Final"
+libraryDependencies += "org.drools" % "drools-compiler" % "5.4.0.Final"
 
-libraryDependencies += "org.drools" % "drools-core" % "5.3.1.Final"
+libraryDependencies += "org.drools" % "drools-core" % "5.4.0.Final"
 
-libraryDependencies += "org.drools" % "drools-jsr94"  % "5.3.1.Final"
+libraryDependencies += "org.drools" % "drools-jsr94"  % "5.4.0.Final"
 
-libraryDependencies += "org.drools" % "drools-decisiontables"  % "5.3.1.Final"
+libraryDependencies += "org.drools" % "drools-decisiontables"  % "5.4.0.Final"
 
-libraryDependencies += "org.drools" % "knowledge-api"  % "5.3.1.Final"
+libraryDependencies += "org.drools" % "knowledge-api"  % "5.4.0.Final"
 
 
 

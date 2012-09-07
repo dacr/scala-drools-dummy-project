@@ -3,6 +3,7 @@ package dummy;
 dialect "mvel"
 
 import java.util.LinkedList;
+import dummy.model.*;
 
 // --------------------------------------------------------------
 
@@ -60,7 +61,7 @@ rule "Who live at London"
     $someone:Someone($name:name)
     Home(someone == $someone, address.isDefined, ((Address)address.get).town == "London")
   then
-    insert(new InformationRequest($someone, $name+" lives in London"))
+    insert(new InformationRemarkable($someone, $name+" lives in London"))
 end
 
 // --------------------------------------------------------------
@@ -71,6 +72,15 @@ rule "process information requests"
   then
     System.out.println("INFORMATION REQUESTED FOR "+$who+" : "+$what)
 end
+
+
+rule "process remarkable information"
+  when
+    InformationRemarkable($who:someone, $what:info)
+  then
+    System.out.println("REMARKABLE INFORMATION ABOUT "+$who+" : "+$what)
+end
+
 
 // --------------------------------------------------------------
 

@@ -18,10 +18,9 @@ end
 
 rule "people cars"
   when
-    $someone:Someone($name:name)
-    $car : Car(someone == $someone)
+    $car : Car($owner:someone.name)
   then
-    System.out.println("One of "+$name+"'s car is "+$car.color.name+" "+$car.model)
+    System.out.println("One of "+$owner+"'s car is "+$car.color.name+" "+$car.model)
 end
 
 // --------------------------------------------------------------
@@ -48,20 +47,33 @@ end
 
 rule "who doesn't have an address"
   when
-    $someone:Someone($name:name)
-    Home(someone == $someone, !address.isDefined)
+    Home(
+       $someone:someone,
+       !address.isDefined)
   then
-    insert(new InformationRequest($someone, $name+" address is unknown"))
+    insert(new InformationRequest($someone, $someone.name+" address is unknown"))
 end
 
 // --------------------------------------------------------------
 
 rule "Who live at London"
   when
-    $someone:Someone($name:name)
-    Home(someone == $someone, address.isDefined, ((Address)address.get).town == "London")
+    Home(
+      $someone:someone,
+      address.isDefined,
+      address.get.town == "London")
   then
-    insert(new InformationRemarkable($someone, $name+" lives in London"))
+    insert(new InformationRemarkable($someone, $someone.name+" lives in London"))
+end
+
+// --------------------------------------------------------------
+
+rule "who owns more than 1 car"
+  when
+    $someone : Someone($name:name)
+    $cars    : LinkedList( size>1 ) from collect(Car(someone == $someone))
+  then
+    insert(new InformationRemarkable($someone, $someone.name+" has "+$cars.size+" cars"))
 end
 
 // --------------------------------------------------------------
@@ -79,17 +91,6 @@ rule "process remarkable information"
     InformationRemarkable($who:someone, $what:info)
   then
     System.out.println("REMARKABLE INFORMATION ABOUT "+$who+" : "+$what)
-end
-
-
-// --------------------------------------------------------------
-
-rule "who owns more than 1 car"
-  when
-    $someone : Someone($name:name)
-    $cars    : LinkedList( size>1 ) from collect(Car(someone == $someone))
-  then
-    System.out.println($name+" has "+$cars.size+" cars")  
 end
 
 // --------------------------------------------------------------

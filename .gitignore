@@ -8,4 +8,5 @@ target/
 .project
 .cache
 *.log
-
+.settings
+nohup.out

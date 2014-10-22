@@ -53,7 +53,7 @@ class DummyTest extends FunSuite with ShouldMatchers {
   }
   
   test("fired up test") {
-    val found = Dummy.analyze(model1)
+    val found = Dummy.analyze(model1, "KB-People.drl")
     val all = found collect { case x:Information => x}
     all.foreach{i=> info(i.toString)}
     

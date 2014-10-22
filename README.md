@@ -13,7 +13,7 @@ Some advices :
  - To change the java compiler used by drools, use the following 
    system property : "drools.dialect.java.compiler=JANINO".
    It will replace ECJ by Apache Janino, but you will have to
-   provide the dependency your self : 
+   provide the dependency yourself : 
    "org.codehaus.janino" % "janino" % "2.5.16" (Use only this release,
    at least up to Drools 6.1)
 

@@ -6,7 +6,7 @@ name := "ScalaDroolsDummyProject"
 
 version := "3"
 
-scalaVersion := "2.11.2"
+scalaVersion := "2.11.7"
 
 mainClass in assembly := Some("dummy.Dummy")
 
@@ -30,7 +30,7 @@ libraryDependencies ++= Seq(
     "drools-jsr94",
     "drools-decisiontables",
     "knowledge-api"
-).map("org.drools" % _ % "6.1.0.Final")
+).map("org.drools" % _ % "6.3.0.Final")
 
 
 libraryDependencies ++= Seq(
@@ -60,5 +60,7 @@ libraryDependencies ++= {
 initialCommands in console := """import dummy._"""
 
 resolvers += "jboss-releases" at "https://repository.jboss.org/nexus/content/repositories/releases"
+
+resolvers += "jboss-jsr94" at "http://repository.jboss.org/nexus/content/groups/public-jboss"
 
 resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public"

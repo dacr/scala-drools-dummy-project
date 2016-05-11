@@ -18,6 +18,15 @@ end
 
 // --------------------------------------------------------------
 
+rule "who has brown hairs"
+  when
+    Someone(attributes["hairs"]=="brown", $name:name)
+  then
+    logger.info($name+" has brown hairs")
+end
+
+// --------------------------------------------------------------
+
 rule "people cars"
   when
     $car : Car($owner:someone.name)

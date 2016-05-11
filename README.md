@@ -15,6 +15,4 @@ Some advices :
    It will replace ECJ by Apache Janino, but you will have to
    provide the dependency yourself : 
    "org.codehaus.janino" % "janino" % "2.5.16" (Use only this release,
-   at least up to Drools 6.1)
-
-
+   at least up to Drools 6.4.0.Final, to be check again later)

@@ -10,3 +10,7 @@ target/
 *.log
 .settings
 nohup.out
+/bin/
+.cache-main
+.cache-tests
+

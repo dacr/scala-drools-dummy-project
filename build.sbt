@@ -1,12 +1,8 @@
-import AssemblyKeys._
-
-seq(assemblySettings: _*)
-
 name := "ScalaDroolsDummyProject"
 
-version := "3"
+version := "4"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 mainClass in assembly := Some("dummy.Dummy")
 
@@ -30,27 +26,25 @@ libraryDependencies ++= Seq(
     "drools-jsr94",
     "drools-decisiontables",
     "knowledge-api"
-).map("org.drools" % _ % "6.3.0.Final")
+).map("org.drools" % _ % "6.4.0.Final")
 
 
 libraryDependencies ++= Seq(
-  "ch.qos.logback"           % "logback-classic"   % "1.1.2",
-  "com.sun.xml.bind"         % "jaxb-xjc"          % "2.2.4-1", // For drools
-  "com.thoughtworks.xstream" % "xstream"           % "1.4.2",   // For drools
+  "ch.qos.logback"           % "logback-classic"   % "1.1.7",
   "org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.1.+" % "test",
-  "junit"          % "junit"     % "4.+"   % "test"
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
+  "junit"          % "junit"     % "4.12"   % "test"
 )
 
 libraryDependencies ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, scalaMajor)) if scalaMajor >= 11 =>
       libraryDependencies.value ++ Seq(
-        "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
-        "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.2")
+        "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
+        "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4")
     case _ =>
       libraryDependencies.value
   }

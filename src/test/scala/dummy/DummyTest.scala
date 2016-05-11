@@ -28,9 +28,9 @@ import model._
 class DummyTest extends FunSuite with ShouldMatchers {
   
   def model1 = {
-    val martine = Someone(name="Martine", age=30)
-    val martin  = Someone(name="Martin", age=40)
-    val jack    = Someone(name="Jack", age=12)
+    val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi"), attributes=Map("hairs"->"brown"))
+    val martin  = Someone(name="Martin", age=40, nicknames=List("tintin", "titi"), attributes=Map("hairs"->"black"))
+    val jack    = Someone(name="Jack", age=12, nicknames=List("jacquouille"), attributes=Map("eyes"->"blue"))
     val martineCar = Car(martine, "Ford", 2010, Color.blue)
     val martinCar  = Car(martin, "GM", 2010, Color.black)
     val martinCar2 = Car(martin, "Ferrari", 2012, Color.red)

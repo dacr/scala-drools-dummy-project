@@ -27,6 +27,16 @@ end
 
 // --------------------------------------------------------------
 
+rule "who has unknown colored hairs"
+  when
+    Someone(attributes not contains "hairs", $name:name)
+  then
+    logger.info($name+" has unknown colored hairs")
+end
+
+
+// --------------------------------------------------------------
+
 rule "people cars"
   when
     $car : Car($owner:someone.name)

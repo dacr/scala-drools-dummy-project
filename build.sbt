@@ -6,7 +6,7 @@ scalaVersion := "2.11.8"
 
 mainClass in assembly := Some("dummy.Dummy")
 
-jarName in assembly := "dummy.jar"
+assemblyJarName := "dummy.jar"
 
 
 scalacOptions ++= Seq(
@@ -26,17 +26,16 @@ libraryDependencies ++= Seq(
     "drools-jsr94",
     "drools-decisiontables",
     "knowledge-api"
-).map("org.drools" % _ % "6.4.0.Final")
+).map("org.drools" % _ % "6.5.0.Final")
 
 
 libraryDependencies ++= Seq(
-  "ch.qos.logback"           % "logback-classic"   % "1.1.7",
+  "ch.qos.logback"           % "logback-classic"   % "1.2.1",
   "org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
-  "junit"          % "junit"     % "4.12"   % "test"
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 )
 
 libraryDependencies ++= {

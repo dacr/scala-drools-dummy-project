@@ -30,8 +30,8 @@ libraryDependencies ++= Seq(
 
 
 libraryDependencies ++= Seq(
-  "ch.qos.logback"           % "logback-classic"   % "1.2.1",
-  "org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
+  "ch.qos.logback"           % "logback-classic"   % "1.2.1"
+  //"org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
 )
 
 libraryDependencies ++= Seq(

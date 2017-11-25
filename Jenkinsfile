@@ -21,7 +21,7 @@ pipeline {
         success {
           archive 'target/**/dummy.jar'
           junit 'target/junitresults/**/*.xml'
-	  stash name:'exe' includes:'**/dummy.jar'
+	  stash name:'exe', includes:'target/**/dummy.jar'
         }
       }
     }
@@ -30,7 +30,7 @@ pipeline {
     stage('tryit') {
       agent { docker { image 'dacr/jenkins-docker-agent-sbt' } }
       steps {
-        unstash name:'exe'
+        unstash 'exe'
         sh 'java -jar target/*/dummy.jar'
       }
     }

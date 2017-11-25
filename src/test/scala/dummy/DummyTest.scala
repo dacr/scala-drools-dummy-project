@@ -16,16 +16,13 @@
 
 package dummy
 
-import org.junit.runner.RunWith
-import org.scalatest.FunSuite
-import org.scalatest.ShouldMatchers
-import org.scalatest.junit.JUnitRunner
+import org.scalatest._
+import Matchers._
 import collection.JavaConversions._
 
 import model._
 
-@RunWith(classOf[JUnitRunner])
-class DummyTest extends FunSuite with ShouldMatchers {
+class DummyTest extends FunSuite {
   
   def model1 = {
     val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi"), attributes=Map("hairs"->"brown"))

@@ -42,7 +42,7 @@ object Dummy {
   }
 
   def analyze(model: List[Any], kb: String) = {
-    System.setProperty("drools.dialect.java.compiler", "JANINO")
+    //System.setProperty("drools.dialect.java.compiler", "JANINO")
 
     val config = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration()
     config.setProperty("drools.dialect.mvel.strict", "false")

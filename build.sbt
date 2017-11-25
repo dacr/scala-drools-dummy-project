@@ -48,6 +48,15 @@ libraryDependencies ++= {
   }
 }
 
+assemblyMergeStrategy in assembly := {
+    case PathList("javax", "xml", xs @ _*) => MergeStrategy.first
+    case PathList("org", "xmlpull", xs @ _*) => MergeStrategy.first
+    case x if x contains "rootdoc.txt" => MergeStrategy.first
+    case x if x contains ".xls" => MergeStrategy.discard
+    case x =>
+      val oldStrategy = (assemblyMergeStrategy in assembly).value
+      oldStrategy(x)
+}
 
 initialCommands in console := """import dummy._"""
 

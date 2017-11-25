@@ -8,6 +8,7 @@ mainClass in assembly := Some("dummy.Dummy")
 
 jarName in assembly := "dummy.jar"
 
+testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
 
 scalacOptions ++= Seq(
   "-unchecked",
@@ -17,8 +18,6 @@ scalacOptions ++= Seq(
   "-language:implicitConversions",
   "-language:reflectiveCalls"
 )
-
-
 
 libraryDependencies ++= Seq(
     "drools-compiler",

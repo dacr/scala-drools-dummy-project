@@ -34,7 +34,21 @@ pipeline {
         sh 'java -jar target/*/dummy.jar'
       }
     }
+  }
 
+  post {
+    success {
+      slackSend(
+        failOnError:false, color:'good',
+        message: "${env.JOB_NAME} build SUCCESS ! <${env.RUN_DISPLAY_URL}|pipeline status>",
+      )
+    }
+    failure {
+      slackSend(
+        failOnError:false, color:'#FF0000',
+        message:"${env.JOB_NAME} build FAILURE ! <${env.RUN_DISPLAY_URL}|pipeline status>",
+      )
+    }
   }
 
 }

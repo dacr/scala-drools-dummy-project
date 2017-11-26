@@ -13,7 +13,12 @@ pipeline {
 
     // ----------------------------- BUILD
     stage('build') {
-      agent { docker { image 'dacr/jenkins-docker-agent-sbt' } }
+      agent {
+        docker {
+          image 'dacr/jenkins-docker-agent-sbt'
+          args '-v $HOME/.ivy2:/home/sbt/.ivy2 -v $HOME/.m2:/home/sbt/.m2'
+        }
+      }
       steps {
         sh 'sbt assembly'
       }

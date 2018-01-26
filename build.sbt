@@ -1,8 +1,8 @@
 name := "ScalaDroolsDummyProject"
 
-version := "4"
+version := "5"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.4"
 
 mainClass in assembly := Some("dummy.Dummy")
 
@@ -22,33 +22,21 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
     "drools-compiler",
-    "drools-core",
-    "drools-jsr94",
-    "drools-decisiontables",
-    "knowledge-api"
-).map("org.drools" % _ % "6.5.0.Final")
+    "drools-core"
+//    "drools-jsr94",
+//    "drools-decisiontables",
+//    "knowledge-api"
+).map("org.drools" % _ % "7.5.0.Final")
 
 
 libraryDependencies ++= Seq(
-  "ch.qos.logback"           % "logback-classic"   % "1.2.1"
+  "ch.qos.logback"           % "logback-classic"   % "1.2.3"
   //"org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 )
-
-libraryDependencies ++= {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, scalaMajor)) if scalaMajor >= 11 =>
-      libraryDependencies.value ++ Seq(
-        "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
-        "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4")
-    case _ =>
-      libraryDependencies.value
-  }
-}
-
 
 initialCommands in console := """import dummy._"""
 
@@ -57,3 +45,14 @@ resolvers += "jboss-releases" at "https://repository.jboss.org/nexus/content/rep
 resolvers += "jboss-jsr94" at "http://repository.jboss.org/nexus/content/groups/public-jboss"
 
 resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public"
+
+
+assemblyMergeStrategy in assembly  := {
+    case PathList("javax", "xml", xs @ _*) => MergeStrategy.first
+    case PathList("org", "xmlpull", xs @ _*) => MergeStrategy.first
+    case "META-INF/kie.conf" => MergeStrategy.first
+    case "META-INF/ErraiApp.properties" => MergeStrategy.first // META-INF/ErraiApp.properties
+    case x =>
+      val oldStrategy = (assemblyMergeStrategy in assembly).value
+      oldStrategy(x)
+}

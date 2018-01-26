@@ -13,4 +13,4 @@ nohup.out
 /bin/
 .cache-main
 .cache-tests
-
+.DS_Store

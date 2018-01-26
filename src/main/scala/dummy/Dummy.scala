@@ -19,13 +19,15 @@ package dummy
 import dummy.model._
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import org.drools.core.audit.WorkingMemoryConsoleLogger
-import org.drools.io.Resource
-import org.drools.io.ResourceFactory
-import org.drools.builder.KnowledgeBuilderFactory
-import org.drools.builder.ResourceType
+
+import org.kie.api._
+import org.kie.api.io._
+import org.kie.api.runtime._
+import org.kie.internal.builder._
+import org.kie.internal.io._
+
 import java.io.File
-import collection.JavaConversions._
+import collection.JavaConverters._
 import org.slf4j.LoggerFactory
 
 object Dummy {
@@ -53,14 +55,14 @@ object Dummy {
 
     val errors = kbuilder.getErrors();
     if (errors.size() > 0) {
-      for (error <- errors) logger.error(error.getMessage())
+      for (error <- errors.asScala) logger.error(error.getMessage())
       throw new IllegalArgumentException("Problem with the Knowledge base");
     }
 
 
-    val kbase = kbuilder.newKnowledgeBase()
+    val kbase = kbuilder.newKieBase()
     
-    val results = using(kbase.newStatefulKnowledgeSession()) { session =>
+    val results = using(kbase.newKieSession()) { session =>
       session.setGlobal("logger", LoggerFactory.getLogger(kb))
       model.foreach(session.insert(_))
       session.fireAllRules()

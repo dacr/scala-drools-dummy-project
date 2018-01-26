@@ -8,6 +8,7 @@ mainClass in assembly := Some("dummy.Dummy")
 
 assemblyJarName := "dummy.jar"
 
+testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
 
 scalacOptions ++= Seq(
   "-unchecked",
@@ -18,14 +19,9 @@ scalacOptions ++= Seq(
   "-language:reflectiveCalls"
 )
 
-
-
 libraryDependencies ++= Seq(
     "drools-compiler",
     "drools-core"
-//    "drools-jsr94",
-//    "drools-decisiontables",
-//    "knowledge-api"
 ).map("org.drools" % _ % "7.5.0.Final")
 
 

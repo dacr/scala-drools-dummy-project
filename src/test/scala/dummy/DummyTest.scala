@@ -24,33 +24,8 @@ import model._
 
 class DummyTest extends FunSuite {
   
-  def model1 = {
-    val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi").asJava, attributes=Map("hairs"->"brown").asJava)
-    val martin  = Someone(name="Martin", age=40, nicknames=List("tintin", "titi").asJava, attributes=Map("hairs"->"black").asJava)
-    val jack    = Someone(name="Jack", age=12, nicknames=List("jacquouille").asJava, attributes=Map("eyes"->"blue").asJava)
-    val martineCar = Car(martine, "Ford", 2010, Color.blue)
-    val martinCar  = Car(martin, "GM", 2010, Color.black)
-    val martinCar2 = Car(martin, "Ferrari", 2012, Color.red)
-    val martinCar3 = Car(martin, "Porshe", 2011, Color.red)
-    
-    val martinHome = Home(martin, None)
-    val jackHome   = Home(jack, Some(Address("221B Baker Street", "London", "England")))
-    
-    List(
-      martine,
-      martin,
-      jack, 
-      martineCar,
-      martinCar,
-      martinCar2,
-      martinCar3,
-      martinHome,
-      jackHome
-    )
-  }
-  
   test("fired up test") {
-    val found = Dummy.analyze(model1, "KB-People.drl")
+    val found = Dummy.analyze(Dummy.model1, "KB-People.drl")
     val all = found.asScala collect { case x:Information => x}
     all.foreach{i=> info(i.toString)}
     

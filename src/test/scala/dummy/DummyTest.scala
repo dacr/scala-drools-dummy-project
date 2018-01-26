@@ -18,16 +18,16 @@ package dummy
 
 import org.scalatest._
 import Matchers._
-import collection.JavaConversions._
+import collection.JavaConverters._
 
 import model._
 
 class DummyTest extends FunSuite {
   
   def model1 = {
-    val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi"), attributes=Map("hairs"->"brown"))
-    val martin  = Someone(name="Martin", age=40, nicknames=List("tintin", "titi"), attributes=Map("hairs"->"black"))
-    val jack    = Someone(name="Jack", age=12, nicknames=List("jacquouille"), attributes=Map("eyes"->"blue"))
+    val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi").asJava, attributes=Map("hairs"->"brown").asJava)
+    val martin  = Someone(name="Martin", age=40, nicknames=List("tintin", "titi").asJava, attributes=Map("hairs"->"black").asJava)
+    val jack    = Someone(name="Jack", age=12, nicknames=List("jacquouille").asJava, attributes=Map("eyes"->"blue").asJava)
     val martineCar = Car(martine, "Ford", 2010, Color.blue)
     val martinCar  = Car(martin, "GM", 2010, Color.black)
     val martinCar2 = Car(martin, "Ferrari", 2012, Color.red)
@@ -46,12 +46,12 @@ class DummyTest extends FunSuite {
       martinCar3,
       martinHome,
       jackHome
-    ) 
+    )
   }
   
   test("fired up test") {
     val found = Dummy.analyze(model1, "KB-People.drl")
-    val all = found collect { case x:Information => x}
+    val all = found.asScala collect { case x:Information => x}
     all.foreach{i=> info(i.toString)}
     
     val valuableInfos = all collect { case x:InformationRemarkable => x}

@@ -1,14 +1,19 @@
 package dummy.model
 
 import java.util.{List=>JList,Map=>JMap}
-import collection.JavaConversions._
+import collection.JavaConverters._
 
 
 // ----------------------------------------------------------------
 // DOMAIN MODEL
 
 
-case class Someone(name:String, age:Int, nicknames:JList[String]=List(), attributes:JMap[String,String]=Map[String,String]())
+case class Someone(
+    name:String,
+    age:Int,
+    nicknames:JList[String]=List.empty[String].asJava,
+    attributes:JMap[String,String]=Map.empty[String,String].asJava
+)
 
 case class Car(someone:Someone, model:String, year:Int, color:Color)
 

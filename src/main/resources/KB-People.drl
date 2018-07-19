@@ -3,9 +3,59 @@ package dummy;
 dialect "mvel"
 
 import java.util.LinkedList
+import java.util.Date
 import dummy.model.*
 
 global org.slf4j.Logger logger
+
+// --------------------------------------------------------------
+import java.util.Map
+
+declare Event
+  timestamp:Date
+  source:String
+end
+
+declare TrucBidule
+  message: String
+  value: int
+end
+
+declare TrucBiduleEvent extends Event
+  @role(event)
+  @timestamp( timestamp )
+  @expires(20s)
+  timestamp:Date
+  trucBidule:TrucBidule
+end
+
+
+rule "truc bidule event happens"
+  when
+    TrucBiduleEvent($truc:trucBidule)
+  then
+    logger.info("TrucBiduleEvent received :"+$truc.message)
+    insert($truc)
+end
+
+
+rule "invalid truc bidule"
+  when
+    TrucBidule($message:message, message!="GOOD")
+  then
+    logger.info("BAD TRUC BIDULE :"+$message)
+end
+
+
+rule "good truc bidule"
+  when
+    TrucBidule($message:message, message=="GOOD")
+  then
+    logger.info("GOOD TRUC BIDULE")
+end
+
+
+// --------------------------------------------------------------
 
 // --------------------------------------------------------------
 
@@ -117,3 +167,47 @@ end
 
 // --------------------------------------------------------------
 
+declare A
+  message:String
+  value:int
+end
+declare B
+  message:String
+  value:int
+end
+declare C
+  message:String
+  value:int
+end
+declare D
+  message:String
+  value:int
+end
+declare E
+  message:String
+  value:int
+end
+declare F
+  message:String
+  value:int
+end
+declare G
+  message:String
+  value:int
+end
+declare H
+  message:String
+  value:int
+end
+declare I
+  message:String
+  value:int
+end
+declare J
+  message:String
+  value:int
+end
+declare K
+  message:String
+  value:int
+end

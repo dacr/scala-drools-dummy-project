@@ -6,6 +6,7 @@ scalaVersion := "2.12.10"
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
 
+enablePlugins(JavaAppPackaging)
 
 libraryDependencies ++= Seq(
     "drools-compiler",

@@ -2,7 +2,7 @@ name := "scala-drools-dummy-project"
 
 version := "7"
 
-scalaVersion := "2.12.10"
+scalaVersion := "2.13.1"
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
 

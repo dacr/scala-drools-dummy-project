@@ -17,12 +17,11 @@
 package dummy
 
 import org.scalatest._
-import Matchers._
 import collection.JavaConverters._
 
 import model._
 
-class DummyTest extends FunSuite {
+class DummyTest extends FunSuite with Matchers {
   
   test("fired up test") {
     val found = Dummy.analyze(Dummy.model1, "KB-People.drl")

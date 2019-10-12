@@ -1,42 +1,26 @@
-name := "ScalaDroolsDummyProject"
+name := "scala-drools-dummy-project"
 
-version := "6"
+version := "7"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.10"
 
-//testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
+testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/junitresults")
 
-//enablePlugins(JavaAppPackaging)
-
-scalacOptions ++= Seq(
-  "-unchecked",
-  "-deprecation",
-  "-Xexperimental",
-  "-feature",
-  "-language:implicitConversions",
-  "-language:reflectiveCalls"
-)
 
 libraryDependencies ++= Seq(
     "drools-compiler",
     "drools-core"
-).map("org.drools" % _ % "7.8.0.Final")
+).map("org.drools" % _ % "7.27.0.Final")
 
 
 libraryDependencies ++= Seq(
   "ch.qos.logback"           % "logback-classic"   % "1.2.3"
-  //"org.codehaus.janino"      % "janino"            % "2.5.16"   // For drools
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 )
 
 initialCommands in console := """
    import dummy._
 """
-
-//resolvers += "jboss-releases" at "https://repository.jboss.org/nexus/content/repositories/releases"
-//resolvers += "jboss-jsr94" at "http://repository.jboss.org/nexus/content/groups/public-jboss"
-//resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public"
-

@@ -17,16 +17,11 @@
 package dummy
 
 import dummy.model._
-import java.io.FileInputStream
-import java.io.InputStreamReader
 
-import org.kie.api._
 import org.kie.api.io._
-import org.kie.api.runtime._
 import org.kie.internal.builder._
 import org.kie.internal.io._
 
-import java.io.File
 import collection.JavaConverters._
 import org.slf4j.LoggerFactory
 
@@ -41,16 +36,16 @@ object Dummy {
 
 
   def model1 = {
-    val martine = Someone(name="Martine", age=30, nicknames=List("titine", "titi").asJava, attributes=Map("hairs"->"brown").asJava)
-    val martin  = Someone(name="Martin", age=40, nicknames=List("tintin", "titi").asJava, attributes=Map("hairs"->"black").asJava)
-    val jack    = Someone(name="Jack", age=12, nicknames=List("jacquouille").asJava, attributes=Map("eyes"->"blue").asJava)
+    val martine = Someone(name = "Martine", age = 30, nicknames = List("titine", "titi").asJava, attributes = Map("hairs" -> "brown").asJava)
+    val martin = Someone(name = "Martin", age = 40, nicknames = List("tintin", "titi").asJava, attributes = Map("hairs" -> "black").asJava)
+    val jack = Someone(name = "Jack", age = 12, nicknames = List("jacquouille").asJava, attributes = Map("eyes" -> "blue").asJava)
     val martineCar = Car(martine, "Ford", 2010, Color.blue)
-    val martinCar  = Car(martin, "GM", 2010, Color.black)
+    val martinCar = Car(martin, "GM", 2010, Color.black)
     val martinCar2 = Car(martin, "Ferrari", 2012, Color.red)
     val martinCar3 = Car(martin, "Porshe", 2011, Color.red)
 
     val martinHome = Home(martin, None)
-    val jackHome   = Home(jack, Some(Address("221B Baker Street", "London", "England")))
+    val jackHome = Home(jack, Some(Address("221B Baker Street", "London", "England")))
 
     List(
       martine,
@@ -66,13 +61,12 @@ object Dummy {
   }
 
 
-  def using[R, T <% { def dispose() }](getres: => T)(doit: T => R): R = {
+  def using[R, T <% {def dispose()}](getres: => T)(doit: T => R): R = {
     val res = getres
     try doit(res) finally res.dispose
   }
 
   def analyze(model: List[Any], kb: String) = {
-    //System.setProperty("drools.dialect.java.compiler", "JANINO")
 
     val config = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration()
     config.setProperty("drools.dialect.mvel.strict", "false")
@@ -87,9 +81,8 @@ object Dummy {
       throw new IllegalArgumentException("Problem with the Knowledge base");
     }
 
-
     val kbase = kbuilder.newKieBase()
-    
+
     val results = using(kbase.newKieSession()) { session =>
       session.setGlobal("logger", LoggerFactory.getLogger(kb))
       model.foreach(session.insert(_))

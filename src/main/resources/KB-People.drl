@@ -79,7 +79,7 @@ end
 
 rule "who has unknown colored hairs"
   when
-    Someone(attributes not contains "hairs", $name:name)
+    Someone(attributes.keySet not contains "hairs", $name:name)
   then
     logger.info($name+" has unknown colored hairs")
 end
